@@ -47,9 +47,9 @@ index 14d3c1e..accb365 100644
 --- a/package.json
 +++ b/package.json
 @@ -132,7 +132,7 @@
-     "@typescript-eslint/eslint-plugin": "^5.57.0",
+     "@typescript-eslint/eslint-plugin": "^6.21.0",
      "@typescript-eslint/experimental-utils": "^5.57.0",
-     "@typescript-eslint/parser": "^5.57.0",
+     "@typescript-eslint/parser": "^6.21.0",
 -    "@vscode/gulp-electron": "git+https://github.com/Alex313031/vscode-gulp-electron.git",
 +    "@vscode/gulp-electron": "git+https://github.com/Alex313031/vscode-gulp-electron-avx.git",
      "@vscode/l10n-dev": "0.0.30",
