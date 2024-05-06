@@ -29,7 +29,7 @@ if [[ -d "../patches/${OS_NAME}/client/" ]]; then
 fi
 
 for i in {1..5}; do # try 5 times
-  yarn --cwd build --frozen-lockfile --check-files && break
+  yarn --cwd build --check-files && break
   if [[ $i == 3 ]]; then
     echo "Yarn failed too many times" >&2
     exit 1
@@ -40,7 +40,7 @@ done
 ./build/azure-pipelines/linux/setup-env.sh
 
 for i in {1..5}; do # try 5 times
-  yarn --frozen-lockfile --check-files && break
+  yarn --check-files && break
   if [ $i -eq 3 ]; then
     echo "Yarn failed too many times" >&2
     exit 1

@@ -24,25 +24,25 @@ VSCODE_HOST_MOUNT="$( pwd )"
 export VSCODE_HOST_MOUNT
 
 if [[ "${VSCODE_ARCH}" == "x64" || "${VSCODE_ARCH}" == "arm64" ]]; then
-  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="vscodium/vscodium-linux-build-agent:centos7-devtoolset8-${VSCODE_ARCH}"
+  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="codium/codium-linux-build-agent:centos7-devtoolset8-${VSCODE_ARCH}"
 elif [[ "${VSCODE_ARCH}" == "armhf" ]]; then
-  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="vscodium/vscodium-linux-build-agent:bionic-devtoolset-arm32v7"
+  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="codium/codium-linux-build-agent:bionic-devtoolset-arm32v7"
 elif [[ "${VSCODE_ARCH}" == "ppc64le" ]]; then
-  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="vscodium/vscodium-linux-build-agent:bionic-devtoolset-ppc64le"
+  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="codium/codium-linux-build-agent:bionic-devtoolset-ppc64le"
   export ELECTRON_SKIP_BINARY_DOWNLOAD=1
   export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 elif [[ "${VSCODE_ARCH}" == "riscv64" ]]; then
-  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="vscodium/vscodium-linux-build-agent:focal-devtoolset-riscv64"
+  VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="codium/codium-linux-build-agent:focal-devtoolset-riscv64"
   export ELECTRON_SKIP_BINARY_DOWNLOAD=1
   export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
   # Unofficial RISC-V nodejs builds doesn't provide v16.x
-  sed -i '/target/s/"16.*"/"18.18.1"/' remote/.yarnrc
+  sed -i '/target/s/"16.*"/"18.18.2"/' remote/.yarnrc
 fi
 
 export VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME
 
 for i in {1..5}; do # try 5 times
-  yarn --cwd build --frozen-lockfile --check-files && break
+  yarn --cwd build --check-files && break
   if [[ $i == 3 ]]; then
     echo "Yarn failed too many times" >&2
     exit 1
@@ -57,7 +57,7 @@ else
 fi
 
 for i in {1..5}; do # try 5 times
-  yarn --frozen-lockfile --check-files && break
+  yarn --check-files && break
   if [ $i -eq 3 ]; then
     echo "Yarn failed too many times" >&2
     exit 1

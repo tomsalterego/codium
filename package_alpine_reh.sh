@@ -22,7 +22,7 @@ VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME="vscodium/vscodium-linux-build-agent:a
 export VSCODE_REMOTE_DEPENDENCIES_CONTAINER_NAME
 
 for i in {1..5}; do # try 5 times
-  yarn --frozen-lockfile --check-files && break
+  yarn --check-files && break
   if [[ $i == 3 ]]; then
     echo "Yarn failed too many times" >&2
     exit 1
