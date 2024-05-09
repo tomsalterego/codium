@@ -25,16 +25,16 @@ if [[ -z "${RELEASE_VERSION}" ]]; then
     #UPDATE_INFO=$( curl --silent --fail "https://update.code.visualstudio.com/api/update/darwin/${VSCODE_QUALITY}/0000000000000000000000000000000000000000" )
   else
     echo "Get version from ${VSCODE_QUALITY}.json"
-    MS_COMMIT="b58957e67ee1e712cebf466b995adf4c5307b2bd"
-    MS_TAG="1.89.0"
+    MS_COMMIT="dc96b837cf6bb4af9cd736aa3af08cf8279f7685"
+    MS_TAG="1.89.1"
   fi
 
   if [[ -z "${MS_COMMIT}" ]]; then
-    MS_COMMIT="b58957e67ee1e712cebf466b995adf4c5307b2bd"
-    MS_TAG="1.89.0"
+    MS_COMMIT="dc96b837cf6bb4af9cd736aa3af08cf8279f7685"
+    MS_TAG="1.89.1"
 
     if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
-      MS_TAG="1.89.0"
+      MS_TAG="1.89.1"
     fi
   fi
 
@@ -49,7 +49,7 @@ else
   if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
     if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+-insider$ ]];
     then
-      MS_TAG="1.89.0"
+      MS_TAG="1.89.1"
     else
       echo "Error: Bad RELEASE_VERSION: ${RELEASE_VERSION}"
       exit 1
@@ -57,7 +57,7 @@ else
   else
     if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+$ ]];
     then
-      MS_TAG="1.89.0"
+      MS_TAG="1.89.1"
     else
       echo "Error: Bad RELEASE_VERSION: ${RELEASE_VERSION}"
       exit 1
@@ -65,7 +65,7 @@ else
   fi
 
   if [[ "${MS_TAG}" == "$( jq -r '.tag' "${VSCODE_QUALITY}".json )" ]]; then
-    MS_COMMIT="b58957e67ee1e712cebf466b995adf4c5307b2bd"
+    MS_COMMIT="dc96b837cf6bb4af9cd736aa3af08cf8279f7685"
   else
     echo "Error: No MS_COMMIT for ${RELEASE_VERSION}"
     exit 1
@@ -83,8 +83,8 @@ git remote add origin https://github.com/Microsoft/vscode.git
 # figure out latest tag by calling MS update API
 if [[ -z "${MS_TAG}" ]]; then
   #UPDATE_INFO=$( curl --silent --fail "https://update.code.visualstudio.com/api/update/darwin/${VSCODE_QUALITY}/0000000000000000000000000000000000000000" )
-  MS_COMMIT="b58957e67ee1e712cebf466b995adf4c5307b2bd"
-  MS_TAG="1.89.0"
+  MS_COMMIT="dc96b837cf6bb4af9cd736aa3af08cf8279f7685"
+  MS_TAG="1.89.1"
 elif [[ -z "${MS_COMMIT}" ]]; then
   REFERENCE=$( git ls-remote --tags | grep -x ".*refs\/tags\/${MS_TAG}" | head -1 )
 
@@ -92,8 +92,8 @@ elif [[ -z "${MS_COMMIT}" ]]; then
     echo "Error: The following tag can't be found: ${MS_TAG}"
     exit 1
   elif [[ "${REFERENCE}" =~ ^([[:alnum:]]+)[[:space:]]+refs\/tags\/([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-    MS_COMMIT="b58957e67ee1e712cebf466b995adf4c5307b2bd"
-    MS_TAG="1.89.0"
+    MS_COMMIT="dc96b837cf6bb4af9cd736aa3af08cf8279f7685"
+    MS_TAG="1.89.1"
   else
     echo "Error: The following reference can't be parsed: ${REFERENCE}"
     exit 1
