@@ -61,7 +61,7 @@ else
   export VSCODE_ARCH="x64"
 fi
 
-while getopts ":ilopsa" opt; do
+while getopts ":ilopsaw" opt; do
   case "$opt" in
     i)
       export BINARY_NAME="codium-dev"
@@ -81,6 +81,9 @@ while getopts ":ilopsa" opt; do
       ;;
     a)
       export VSCODE_ARCH="arm64"
+      ;;
+    w)
+      export VSCODE_ARCH="ia32"
       ;;
     *)
       ;;

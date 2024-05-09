@@ -23,7 +23,8 @@ displayHelp () {
 	printf "${bold}${YEL}Use the --linux flag to build for Linux.${c0}\n" &&
 	printf "${bold}${YEL}Use the --linux-arm flag to build for Linux (arm64).${c0}\n" &&
 	printf "${bold}${YEL}Use the --avx flag to build for Linux (AVX Version).${c0}\n" &&
-	printf "${bold}${YEL}Use the --win flag to build for Windows.${c0}\n" &&
+	printf "${bold}${YEL}Use the --win flag to build for Windows (x64).${c0}\n" &&
+	printf "${bold}${YEL}Use the --win32 flag to build for Windows (x86).${c0}\n" &&
 	printf "${bold}${YEL}Use the --mac flag to build for MacOS.${c0}\n" &&
 	printf "${bold}${YEL}Use the --mac-arm flag to build for MacOS (arm64).${c0}\n" &&
 	printf "${bold}${YEL}Use the --clean flag to remove all artifacts.\n" &&
@@ -49,20 +50,6 @@ cleanCodium () {
 case $1 in
 	--clean) cleanCodium; exit 0;;
 esac
-
-printf "\n" &&
-printf "${bold}${GRE}Script to build Codium for Linux or Windows.${c0}\n" &&
-printf "${bold}${YEL}Use the --deps flag to install build dependencies.${c0}\n" &&
-printf "${bold}${YEL}Use the --linux flag to build for Linux.${c0}\n" &&
-printf "${bold}${YEL}Use the --linux-arm flag to build for Linux (arm64).${c0}\n" &&
-printf "${bold}${YEL}Use the --avx flag to build for Linux (AVX Version).${c0}\n" &&
-printf "${bold}${YEL}Use the --win flag to build for Windows.${c0}\n" &&
-printf "${bold}${YEL}Use the --mac flag to build for MacOS.${c0}\n" &&
-printf "${bold}${YEL}Use the --mac-arm flag to build for MacOS (arm64).${c0}\n" &&
-printf "${bold}${YEL}Use the --clean flag to remove all artifacts.\n" &&
-printf "${bold}${YEL}Use the --help flag to show this help.${c0}\n" &&
-printf "\n" &&
-tput sgr0 &&
 
 buildLinux (){
 printf "\n" &&
@@ -128,9 +115,9 @@ case $1 in
 	--avx) buildLinuxAVX; exit 0;;
 esac
 
-buildWin (){
+buildWin64 (){
 printf "\n" &&
-printf "${bold}${GRE}Building Codium for Windows...${c0}\n" &&
+printf "${bold}${GRE}Building Codium for Windows (x64)...${c0}\n" &&
 printf "\n" &&
 tput sgr0 &&
 
@@ -152,7 +139,34 @@ set LDFLAGS="-Wl,-O3 -msse3 -s" &&
 . ./build/build.sh -s
 }
 case $1 in
-	--win) buildWin; exit 0;;
+	--win) buildWin64; exit 0;;
+esac
+
+buildWin32 (){
+printf "\n" &&
+printf "${bold}${GRE}Building Codium for Windows (x86)...${c0}\n" &&
+printf "\n" &&
+tput sgr0 &&
+
+# Set msvs_version for node-gyp on Windows
+export MSVS_VERSION="2022" &&
+export GYP_MSVS_VERSION="2022" &&
+set MSVS_VERSION="2022" &&
+set GYP_MSVS_VERSION="2022" &&
+
+export CFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+export CXXFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+export CPPFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+export LDFLAGS="-Wl,-O3 -msse3 -s" &&
+set CFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+set CXXFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+set CPPFLAGS="-DNDEBUG -msse3 -O3 -g0 -s" &&
+set LDFLAGS="-Wl,-O3 -msse3 -s" &&
+
+. ./build/build.sh -s -w
+}
+case $1 in
+	--win32) buildWin32; exit 0;;
 esac
 
 buildMac (){
@@ -189,4 +203,17 @@ case $1 in
 	--mac-arm) buildMacArm; exit 0;;
 esac
 
-exit 0
+printf "\n" &&
+printf "${bold}${GRE}Script to build Codium for Linux or Windows.${c0}\n" &&
+printf "${bold}${YEL}Use the --deps flag to install build dependencies.${c0}\n" &&
+printf "${bold}${YEL}Use the --linux flag to build for Linux.${c0}\n" &&
+printf "${bold}${YEL}Use the --linux-arm flag to build for Linux (arm64).${c0}\n" &&
+printf "${bold}${YEL}Use the --avx flag to build for Linux (AVX Version).${c0}\n" &&
+printf "${bold}${YEL}Use the --win flag to build for Windows (x64).${c0}\n" &&
+printf "${bold}${YEL}Use the --win32 flag to build for Windows (x86).${c0}\n" &&
+printf "${bold}${YEL}Use the --mac flag to build for MacOS.${c0}\n" &&
+printf "${bold}${YEL}Use the --mac-arm flag to build for MacOS (arm64).${c0}\n" &&
+printf "${bold}${YEL}Use the --clean flag to remove all artifacts.\n" &&
+printf "${bold}${YEL}Use the --help flag to show this help.${c0}\n" &&
+printf "\n" &&
+tput sgr0
