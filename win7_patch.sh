@@ -37,6 +37,12 @@ printf "\n" &&
 git apply --reject ../nt6.patch  &&
 
 printf "\n" &&
+printf "${GRE}Patching vscode for 32-bit Windows...${c0}\n" &&
+printf "\n" &&
+
+git apply --reject ../win32-ia32.patch  &&
+
+printf "\n" &&
 printf "${GRE}Patching vscode for Ubuntu 18.04/Debian 9...${c0}\n" &&
 printf "\n" &&
 
