@@ -121,6 +121,19 @@ index 5adfdfb..674eb41 100644
 +gulp.task(task.define('vscode-win32-ia32-inno-updater', task.series(copyInnoUpdater('ia32'), updateIcon(path.join(buildPath('ia32'), 'tools', 'inno_updater.exe')))));
  gulp.task(task.define('vscode-win32-x64-inno-updater', task.series(copyInnoUpdater('x64'), updateIcon(path.join(buildPath('x64'), 'tools', 'inno_updater.exe')))));
  gulp.task(task.define('vscode-win32-arm64-inno-updater', task.series(copyInnoUpdater('arm64'), updateIcon(path.join(buildPath('arm64'), 'tools', 'inno_updater.exe')))));
+diff --git a/build/npm/preinstall.js b/build/npm/preinstall.js
+index edf0d98..5405eb2 100644
+--- a/build/npm/preinstall.js
++++ b/build/npm/preinstall.js
+@@ -44,7 +44,7 @@ if (!/yarn[\w-.]*\.c?js$|yarnpkg$/.test(process.env['npm_execpath'])) {
+ 	err = true;
+ }
+ 
+-if (process.platform === 'win32') {
++if (process.platform === 'win32' && !process.env['VSCODE_SKIP_NODE_VERSION_CHECK']) {
+ 	if (!hasSupportedVisualStudioVersion()) {
+ 		console.error('\x1b[1;31m*** Invalid C/C++ Compiler Toolchain. Please check https://github.com/microsoft/vscode/wiki/How-to-Contribute#prerequisites.\x1b[0;0m');
+ 		err = true;
 diff --git a/build/win32/code.iss b/build/win32/code.iss
 index fca3d1e..f934318 100644
 --- a/build/win32/code.iss

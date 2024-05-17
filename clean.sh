@@ -38,7 +38,9 @@ rm -r -f VSCode-linux-arm64 &&
 rm -r -f vscode-reh-linux-x64 &&
 rm -r -f vscode-reh-linux-arm64 &&
 rm -r -f VSCode-win32-x64 &&
+rm -r -f VSCode-win32-ia32 &&
 rm -r -f vscode-reh-win32-x64 &&
+rm -r -f vscode-reh-win32-ia32 &&
 rm -r -f VSCode-darwin-x64 &&
 rm -r -f vscode-reh-darwin-x64 &&
 rm -r -f VSCode-darwin-arm64 &&

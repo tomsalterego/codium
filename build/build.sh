@@ -81,9 +81,11 @@ while getopts ":ilopsaw" opt; do
       ;;
     a)
       export VSCODE_ARCH="arm64"
+      export npm_config_arch="arm64"
       ;;
     w)
       export VSCODE_ARCH="ia32"
+      export npm_config_arch="ia32"
       ;;
     *)
       ;;
@@ -109,6 +111,7 @@ echo "SKIP_SOURCE=\"${SKIP_SOURCE}\""
 echo "SKIP_BUILD=\"${SKIP_BUILD}\""
 echo "SKIP_ASSETS=\"${SKIP_ASSETS}\""
 echo "VSCODE_ARCH=\"${VSCODE_ARCH}\""
+echo "NPM_CONFIG_ARCH=\"npm_config_arch\""
 echo "VSCODE_LATEST=\"${VSCODE_LATEST}\""
 echo "VSCODE_QUALITY=\"${VSCODE_QUALITY}\""
 
