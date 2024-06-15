@@ -8,7 +8,7 @@
   - [Flatpak most common issues](#linux-flatpak-most-common-issues)
 - [macOS](#macos)
   - [App can't be opened because Apple cannot check it for malicious software](#macos-unidentified-developer)
-  - ["VSCodium.app" is damaged and can’t be opened. You should move it to the Bin](#macos-quarantine)
+  - ["Codium.app" is damaged and can’t be opened. You should move it to the Bin](#macos-quarantine)
 
 
 ## <a id="linux"></a>Linux
@@ -39,7 +39,7 @@ Credits: [Gerson](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/issues/
 
 - blurry screen with HiDPI on wayland run:
   ```bash
-  flatpak override --user --nosocket=wayland com.vscodium.codium
+  flatpak override --user --nosocket=wayland com.alex313031.codium
   ```
 - To execute commands on the host system, run inside the sandbox
   ```bash
@@ -63,10 +63,10 @@ Since the App is signed with a self-signed certificate, on the first launch, you
 
 You can right-click the App and choose `Open`.
 
-#### <a id="macos-quarantine"></a>*"VSCodium.app" is damaged and can’t be opened. You should move it to the Bin.*
+#### <a id="macos-quarantine"></a>*"Codium.app" is damaged and can’t be opened. You should move it to the Bin.*
 
 The following command will remove the quarantine attribute.
 
 ```
-xattr -r -d com.apple.quarantine /Applications/VSCodium.app
+xattr -r -d com.apple.quarantine /Applications/Codium.app
 ```
