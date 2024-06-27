@@ -14,12 +14,12 @@ if [[ "${SHOULD_BUILD}" == "yes" ]]; then
 
   export NODE_OPTIONS="--max-old-space-size=8192"
 
-  yarn monaco-compile-check
-  yarn valid-layers-check
+  yarn monaco-compile-check &&
+  yarn valid-layers-check &&
 
-  yarn gulp compile-build
-  yarn gulp compile-extension-media
-  yarn gulp compile-extensions-build
+  yarn gulp compile-build &&
+  yarn gulp compile-extension-media &&
+  yarn gulp compile-extensions-build &&
   yarn gulp minify-vscode
 
   if [[ "${OS_NAME}" == "osx" ]]; then
