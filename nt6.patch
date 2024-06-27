@@ -13,7 +13,7 @@ index b40fb7e..1341cbe 100644
  disturl "https://electronjs.org/headers"
 -target "29.4.0"
 +target "22.3.27"
- ms_build_id "9593362"
+ ms_build_id "9728852"
  runtime "electron"
  build_from_source "true"
 diff --git a/build/checksums/electron.txt b/build/checksums/electron.txt
